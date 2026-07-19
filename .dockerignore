@@ -1,0 +1,23 @@
+# Ignore Git repository
+.git/
+.github/
+
+# Ignore local persistent volumes
+data/
+FILES/
+
+# Ignore compiled files and local test results
+main
+*.exe
+*.test
+*.out
+*.log
+
+# Ignore local config files
+.env
+config.json
+
+# Ignore IDE files
+.idea/
+.vscode/
+.DS_Store

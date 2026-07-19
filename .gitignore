@@ -1,0 +1,31 @@
+# Compiled binaries
+/main
+/*.exe
+/*.test
+/*.out
+
+# IDE and System Files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
+
+# Project-specific paths
+/data/
+/FILES/
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+.env
+config.json
+*.local
+
+# Go package cache and logs
+/vendor/
+*.log

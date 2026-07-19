@@ -1,0 +1,15 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: zenith-file-saver
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/app/data
+      - ./FILES:/app/FILES
+    environment:
+      - TZ=America/Sao_Paulo # Configure correct timezone for file dates
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    restart: unless-stopped

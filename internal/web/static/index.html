@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zap File Saver - Painel de Controle</title>
+    <!-- Google Fonts: Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="glass-bg"></div>
+    
+    <header class="app-header">
+        <div class="logo-container">
+            <div class="logo-icon">⚡</div>
+            <div>
+                <h1>Zap File Saver</h1>
+                <p class="subtitle">Monitoramento inteligente de arquivos via WhatsApp & Gemini</p>
+            </div>
+        </div>
+        
+        <div class="status-panel">
+            <span class="status-label">Status do Zap:</span>
+            <div id="connection-badge" class="badge badge-disconnected">
+                <span class="badge-dot"></span>
+                <span id="connection-status-text">Desconectado</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-grid">
+        <!-- Coluna da Esquerda: Conexão & QR Code -->
+        <section class="card auth-card">
+            <h2>Conexão WhatsApp</h2>
+            <p class="card-desc">Escaneie o QR Code abaixo com seu WhatsApp para ativar o monitoramento.</p>
+            
+            <div class="qr-container">
+                <div id="qr-placeholder" class="qr-placeholder">
+                    <div class="spinner"></div>
+                    <p id="qr-placeholder-text">Aguardando inicialização...</p>
+                </div>
+                <img id="qr-image" src="" alt="WhatsApp QR Code" class="qr-image hidden">
+            </div>
+            
+            <div id="auth-actions" class="auth-actions hidden">
+                <div class="account-info">
+                    <p class="info-row"><strong>Sessão ativa</strong></p>
+                    <p class="info-row text-muted">Monitorando mensagens em tempo real.</p>
+                </div>
+                <button id="btn-logout" class="btn btn-danger">Desconectar WhatsApp</button>
+            </div>
+        </section>
+
+        <!-- Coluna da Direita: Configurações -->
+        <section class="card config-card">
+            <h2>Configurações do Monitor</h2>
+            <form id="config-form" class="config-form">
+                <div class="form-group">
+                    <label for="gemini-key">Chave de API do Gemini</label>
+                    <input type="password" id="gemini-key" placeholder="Insira sua GEMINI_API_KEY" required autocomplete="current-password">
+                    <small class="form-help">Usada para classificar e renomear os arquivos enviados.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="model-select">Modelo do Gemini</label>
+                    <select id="model-select" disabled>
+                        <option value="gemini-3.5-flash">gemini-3.5-flash (Padrão)</option>
+                    </select>
+                    <small class="form-help">Modelo usado para classificar e renomear os arquivos.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="group-select">Grupo para Monitorar</label>
+                    <select id="group-select" disabled>
+                        <option value="">-- Conecte o WhatsApp Primeiro --</option>
+                    </select>
+                    <small class="form-help">Escolha o grupo onde os arquivos serão enviados.</small>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" id="btn-save-config" class="btn btn-primary" disabled>Salvar Configurações</button>
+                    <button type="button" id="btn-refresh-groups" class="btn btn-secondary" disabled>Recarregar Grupos</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Seção Inferior de Logs (Terminal) -->
+        <section class="card console-card">
+            <div class="card-header-flex">
+                <h2>Console de Eventos</h2>
+                <button id="btn-clear-logs" class="btn btn-xs btn-secondary">Limpar Logs</button>
+            </div>
+            <div id="log-console" class="log-console">
+                <div class="log-line log-system">[Sistema] Aguardando conexão com o servidor...</div>
+            </div>
+        </section>
+
+        <!-- Seção de Histórico de Arquivos -->
+        <section class="card history-card">
+            <h2>Arquivos Processados</h2>
+            <div class="table-container">
+                <table id="files-table">
+                    <thead>
+                        <tr>
+                            <th>Data/Hora</th>
+                            <th>Remetente</th>
+                            <th>Nome Original</th>
+                            <th>Classificação Gemini</th>
+                            <th>Novo Nome & Destino</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="files-table-body">
+                        <tr class="empty-row">
+                            <td colspan="6">Nenhum arquivo processado ainda.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <p>&copy; 2026 Zap File Saver. Desenvolvido com Go, whatsmeow e Gemini API.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

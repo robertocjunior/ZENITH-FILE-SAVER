@@ -1,14 +1,16 @@
 services:
   app:
-    image: ghcr.io/robertocjunior/zenith-file-saver:latest
-    container_name: zenith-file-saver
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    container_name: zenith-file-saver-local
     ports:
       - "8080:8080"
     volumes:
-      - ./data:/app/data
-      - ./FILES:/app/FILES
+      - ../data:/app/data
+      - ../FILES:/app/FILES
     env_file:
-      - .env
+      - ../.env
     environment:
       - TZ=America/Sao_Paulo # Configure correct timezone for file dates
     restart: unless-stopped

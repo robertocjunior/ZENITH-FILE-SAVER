@@ -51,17 +51,37 @@ O projeto segue as diretrizes da arquitetura estruturada de Go (Clean Code):
 
 ---
 
-## 🛠️ Início Rápido (Docker Compose)
+## 🛠️ Execução do Projeto (Docker)
 
-O método mais fácil de rodar o projeto é utilizando Docker Compose. Certifique-se de ter o Docker instalado e execute:
+O projeto está configurado para rodar em Docker de duas maneiras: utilizando a imagem pré-compilada da nuvem ou compilando o código Go localmente.
 
+### ⚙️ Configuração de Credenciais (.env)
+Antes de rodar qualquer contêiner, copie o arquivo de exemplo `example.env` como `.env` e insira sua chave do Gemini:
 ```bash
-# Iniciar o container em segundo plano
-docker compose up -d --build
+cp example.env .env
+# Edite o arquivo .env e insira sua GEMINI_API_KEY
 ```
 
+---
+
+### 🚀 Opção 1: Execução com Imagem Pronta (Recomendado)
+Para rodar utilizando a imagem oficial pré-compilada disponibilizada no GitHub Container Registry (GHCR):
+```bash
+# Iniciar o container puxando a imagem mais recente
+docker compose up -d
+```
 Acesse o painel em seu navegador:
 👉 [**http://localhost:8080**](http://localhost:8080)
+
+---
+
+### 💻 Opção 2: Compilação e Build Local
+Caso queira compilar o código fonte Go diretamente na sua máquina antes de rodar o contêiner:
+```bash
+# Iniciar o container compilando o código Go local
+docker compose -f local-build/docker-compose.yml up --build -d
+```
+O contêiner rodará sob o nome `zenith-file-saver-local` e lerá o arquivo `.env` localizado na raiz do projeto.
 
 ---
 
